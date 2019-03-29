@@ -1,0 +1,24 @@
+sudo: required
+language: node_js
+notifications:
+  email: ferreira.alexandre@gmail.com
+node_js:
+- 8.12.0
+service:
+- postgresql
+env:
+  global:
+  - NODE_ENV: test
+  - TRAVIS: true
+addons:
+  postgresql: '10.7'
+before_script:
+- psql -c 'create database ts_api_test'
+- npm i -g sequelize-cli gulp-cli
+- cd sever/
+- sequelize db:migrate --env test
+- npm install
+- gulp
+scrpit:
+- npm run unit-test
+- npm run integration-test
