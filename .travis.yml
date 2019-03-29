@@ -19,6 +19,6 @@ before_script:
 - sequelize db:migrate --env test
 - npm install
 - gulp
-scrpit:
+script:
 - npm run unit-test
 - npm run integration-test
