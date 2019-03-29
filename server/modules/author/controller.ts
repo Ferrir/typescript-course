@@ -1,52 +1,52 @@
 import { Request, Response } from 'express'
 import * as _ from 'lodash'
 import Handlers from '../../api/responses/handlers'
-import User from './service'
+import Author from './service'
 
- class UserController {
+ class AuthorController {
 
    constructor() {
    }  
 
    getAll(req: Request, res: Response) {
-      User
+      Author
          .getAll()
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao buscar todos os usuários`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao buscar todos os autores`))
    }
 
-   createUser(req: Request, res: Response) {
-      User
+   create(req: Request, res: Response) {
+      Author
          .create(req.body)
          .then(_.partial(Handlers.onSuccess, res))
          .catch(_.partial(Handlers.dbErrorHandler, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao criar um novo usuário`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao criar um novo autor`))
    }
 
    getById(req: Request, res: Response) {
       const id = parseInt(req.params.id)
-      User
+      Author
          .getById(parseInt(req.params.id))
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao consultar o usuário id = ${id}`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao consultar o autor id = ${id}`))
    }
 
-   updateUser(req: Request, res: Response) {
+   update(req: Request, res: Response) {
       const id = parseInt(req.params.id)
       const props = req.body
-      User
+      Author
          .update(id, props)
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao atualizar o usuário id = ${id}, com ${props}`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao atualizar o autor id = ${id}, com ${props}`))
    }
 
-   deleteUser(req: Request, res: Response) {
+   delete(req: Request, res: Response) {
       const id = parseInt(req.params.id)
-      User
+      Author
          .delete(id)
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao deletar o usuário id = ${id}`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao deletar o autor id = ${id}`))
    }
  }
 
- export default new UserController()
+ export default new AuthorController()

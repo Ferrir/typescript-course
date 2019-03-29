@@ -1,52 +1,51 @@
 import { Request, Response } from 'express'
 import * as _ from 'lodash'
 import Handlers from '../../api/responses/handlers'
-import User from './service'
+import Post from './service'
 
- class UserController {
+ class PostController {
 
-   constructor() {
-   }  
+   constructor() {}  
 
    getAll(req: Request, res: Response) {
-      User
+      Post
          .getAll()
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao buscar todos os usuários`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao buscar todas as postagem`))
    }
 
-   createUser(req: Request, res: Response) {
-      User
+   create(req: Request, res: Response) {
+      Post
          .create(req.body)
          .then(_.partial(Handlers.onSuccess, res))
          .catch(_.partial(Handlers.dbErrorHandler, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao criar um novo usuário`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao criar uma nova postagem`))
    }
 
    getById(req: Request, res: Response) {
       const id = parseInt(req.params.id)
-      User
+      Post
          .getById(parseInt(req.params.id))
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao consultar o usuário id = ${id}`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao consultar a postagem id = ${id}`))
    }
 
-   updateUser(req: Request, res: Response) {
+   update(req: Request, res: Response) {
       const id = parseInt(req.params.id)
       const props = req.body
-      User
+      Post
          .update(id, props)
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao atualizar o usuário id = ${id}, com ${props}`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao atualizar a postagem id = ${id}, com ${props}`))
    }
 
-   deleteUser(req: Request, res: Response) {
+   delete(req: Request, res: Response) {
       const id = parseInt(req.params.id)
-      User
+      Post
          .delete(id)
          .then(_.partial(Handlers.onSuccess, res))
-         .catch(_.partial(Handlers.onError, res, `Erro ao deletar o usuário id = ${id}`))
+         .catch(_.partial(Handlers.onError, res, `Erro ao deletar a postagem id = ${id}`))
    }
  }
 
- export default new UserController()
+ export default new PostController()

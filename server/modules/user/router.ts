@@ -1,6 +1,4 @@
-
 import { Request, Response } from 'express'
-
 import UserController from './controller'
 
 class UserRoutes {
