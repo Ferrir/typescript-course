@@ -13,7 +13,7 @@ env:
 addons:
   postgresql: '10.7'
 before_script:
-- psql -c 'create database ts_api_test'
+- psql -c 'create database ts_api_test;' -U postgres
 - npm i -g sequelize-cli gulp-cli
 - cd sever/
 - sequelize db:migrate --env test
